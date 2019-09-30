@@ -202,11 +202,13 @@ class schoolsearch {
 		boolean loopAgain = true;
 
 		ArrayList<Student> students = new ArrayList<Student>();
+		ArrayList<Teacher> teachers = new ArrayList<Teacher>();
 		Parser parser = new Parser();
 		schoolsearch application = new schoolsearch();
 
 		// obtains array of Student objects
-		students = parser.parseFile("students.txt");
+		students = parser.parseStudentFile("list.txt");
+		teachers = parser.parseTeacherFile("teachers.txt");
 
 		// performs io error checking for students.txt
 		if (students == null) {
