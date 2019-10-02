@@ -58,7 +58,7 @@ public class Parser {
 
 			while ((line = br.readLine()) != null) 
 			{
-				attribs = line.split(",", 3);
+				attribs = line.split(", ", 3);
 				teachersList.add(new Teacher(attribs[0], attribs[1], Integer.parseInt(attribs[2])));
 			}
 

@@ -23,7 +23,7 @@ class schoolsearch {
 	}
 
 	// Takes user input and determines which function to execute
-	private boolean evaluateInput(ArrayList<Student> studentsList) {
+	private boolean evaluateInput(ArrayList<Student> studentsList, ArrayList<Teacher> teacherslist) {
 		System.out.print("\nPlease enter option: ");
 		Scanner scanner = new Scanner(System.in);
 
@@ -44,7 +44,7 @@ class schoolsearch {
 		}
 		// R6
 		if (input.charAt(0) == 'T') {
-		    R6(splitInput[1], studentsList);
+		//    R6(splitInput[1], studentsList);
         }
 
         //R7 and R9
@@ -54,10 +54,10 @@ class schoolsearch {
 	        }
 	        else if (splitInput.length == 3) {
 	        	if (splitInput[2].charAt(0) == 'L') {
-	        		R9(Integer.parseInt(splitInput[1]), 'L', studentsList);
+	        		R9(Integer.parseInt(splitInput[1]), 'L', studentsList, teacherslist);
 	        	}
 	        	else if (splitInput[2].charAt(0) == 'H') {
-	        		R9(Integer.parseInt(splitInput[1]), 'H', studentsList);
+	        		R9(Integer.parseInt(splitInput[1]), 'H', studentsList, teacherslist);
 	        	}
 	        }
         }
@@ -118,7 +118,7 @@ class schoolsearch {
 		for (int i = 0; i < searchedStudents.size(); i++) {
 			System.out.println(searchedStudents.get(i).StLastName + ", " + searchedStudents.get(i).StFirstName);
 		}
-	}
+	} 
 
 	// prints students with certain GPA
 	private void R7(int grade, ArrayList<Student> studentsList) {
@@ -140,24 +140,28 @@ class schoolsearch {
 		}
 	}
 
-	private void R9(int grade, char keyword, ArrayList<Student> studentsList) {
+	private void R9(int grade, char keyword, ArrayList<Student> studentsList, ArrayList<Teacher> teachersList) {
 		ArrayList<Student> storedStudent = new ArrayList<Student>();
+		ArrayList<Teacher> storedTeacher = new ArrayList<Teacher>();
 		for (Student s : studentsList) {
 			if (s.Grade == grade) {
 				if (storedStudent.isEmpty()) {
 					storedStudent.add(s);
+					storedTeacher.add(NR2(s.Classroom, teachersList));
 				}
 				// High
 				if (keyword == 'H' && storedStudent.get(0).GPA < s.GPA) {
 					storedStudent.set(0, s);
+					storedTeacher.set(0, NR2(s.Classroom, teachersList));
 				}
 				// Low
 				if (keyword == 'L' && storedStudent.get(0).GPA > s.GPA) {
 					storedStudent.set(0, s);
+					storedTeacher.set(0, NR2(s.Classroom, teachersList));
 				}
 			}
 		}
-		System.out.printf(storedStudent.get(0).StFirstName + " " + storedStudent.get(0).StLastName + ", %.2f" + ", " + storedStudent.get(0).TFirstName + " " + storedStudent.get(0).TLastName + ", " + storedStudent.get(0).Bus + "\n", storedStudent.get(0).GPA);
+		System.out.printf(storedStudent.get(0).StFirstName + " " + storedStudent.get(0).StLastName + ", %.2f" + ", " + storedTeacher.get(0).TFirstName + " " + storedTeacher.get(0).TLastName + ", " + storedStudent.get(0).Bus + "\n", storedStudent.get(0).GPA);
 	}
 
 	private void R10(int number, ArrayList<Student> studentsList) {
@@ -197,6 +201,22 @@ class schoolsearch {
 		}
 	}
 
+	//Classroom number => Teacher
+	private Teacher NR2(int classroomNum, ArrayList<Teacher> teacherlist) {
+		Teacher teach = new Teacher("Not found", "not found", 404);
+		for (Teacher t : teacherlist){
+			if (t.Classroom == classroomNum){
+				teach = t;
+			}
+		}
+		return teach;
+	}
+
+	//List out classrooms, ordered by classroom num, w total # students in each class
+	private void NR4(ArrayList<Student> studentsList) {
+		ArrayList<Integer> classrooms;
+		ArrayList<Integer> classroomSizes;
+	}
 	public static void main(String[] args) {
 		// variable which while loop evaluates
 		boolean loopAgain = true;
@@ -218,7 +238,7 @@ class schoolsearch {
 		// main application loop
 		while (loopAgain) {
 			application.printMenu();
-			loopAgain = application.evaluateInput(students);
+			loopAgain = application.evaluateInput(students, teachers);
 		}
 	}
 }
