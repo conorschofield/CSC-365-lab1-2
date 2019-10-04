@@ -12,13 +12,13 @@ class schoolsearch {
 
 	// prints the different input options
 	private void printMenu() {
-
 		System.out.println("\nS[tudent]: <lastname> [B[us]]");
 		System.out.println("T[eacher]: <lastname>");
 		System.out.println("B[us]: <number>");
 		System.out.println("G[rade]: <number> [H[igh]|L[ow]]");
 		System.out.println("A[verage]: <number>");
 		System.out.println("I[nfo]");
+		System.out.println("D[ata]: <bus route> | <grade level> | <teacher name> B | G | T");
 		System.out.println("Q[uit]");
 	}
 
@@ -78,13 +78,33 @@ class schoolsearch {
 		if (input.equals("Q") || input.equals("Quit")) {
 			return false;
 		}
+		// NR5
+		if (input.charAt(0) == 'D') {
+			if (splitInput.length == 3) {
+				if (splitInput[2] == 'B') {
+					busRouteOfStudent(Integer.parseInt(splitInput[1]), studentsList);
+				}
+				if (splitInput[2] == 'G') {
+					gradeLevelOfStudent(Integer.parseInt(splitInput[1]), studentsList);
+				}
+				if (splitInput[2] == 'T') {
+					teacherOfStudent(splitInput[1], studentsList, teacherList);
+				}
+			}
+		}
 		return true;
 	}
 
-	private void R4(String lastname, ArrayList<Student> students) {
+	private void R4(String lastname, ArrayList<Student> students, ArrayList<Teacher> teachers) {
 		ArrayList<Student> searchedStudents = new ArrayList<Student>();
+		int searchedClassroom = -1;
+		for (int i = 0; i < teachers.size(); i++) {
+			if (teachers.get(i).TLastName.equals(lastname)) {
+				searchedClassroom = teachers.get(i).Classroom
+			}
+		}
 		for (int i = 0; i < students.size(); i++) {
-			if (students.get(i).StLastName.equals(lastname)) {
+			if (students.get(i).Classroom.equals(searchedClassroom)) {
 				searchedStudents.add(students.get(i));
 			}
 		}
@@ -196,6 +216,118 @@ class schoolsearch {
 			System.out.println(i + ": " + gradesArray[i]);
 		}
 	}
+
+	// NR5
+	private void gradeLevelOfStudent(int gradeLevel, ArrayList<Student> students) {
+        int averageGPA = 0;
+        int numberOfStudents = 0;
+        int totalGPA = 0;
+        int min = 1000000000;
+        int max = 0;
+        int standardDeviation = 0;
+        ArrayList<Double> gpaArray new ArrayList<Double>();
+
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).Grade == gradeLevel) {
+                double studentGPA = students.get(i).GPA;
+                numberOfStudents++;
+                totalGPA += studentsGPA;
+                gpaArray.add(studentGPA);
+                if (min > studentGPA) {
+                    min = studentGPA;
+                }
+                if (max < studentGPA) {
+                    max = studentGPA;
+                }
+            }
+        }
+        averageGPA = totalGPA / numberOfStudents;
+        standardDeviation = standardDeviation(gpaArray, averageGPA, numberOfStudents);
+
+        System.out.println("Average GPA: " + averageGPA +
+                            "\nMin: " + min +
+                            "\nMax: " + max +
+                            "\nStandard Deviation: " + standardDeviation);
+    }
+
+	private void teacherOfStudent(String teacherLastName, ArrayList<Student> students, ArrayList<Teacher> teachers) {
+        int averageGPA = 0;
+        int numberOfStudents = 0;
+        int totalGPA = 0;
+        int min = 1000000000;
+        int max = 0;
+        int standardDeviation = 0;
+        int searchedClassroom = -1;
+        ArrayList<Double> gpaArray new ArrayList<Double>();
+
+		for (int i = 0; i < teachers.size(); i++) {
+			if (teachers.get(i).TLastName.equals(lastname)) {
+				searchedClassroom = teachers.get(i).Classroom
+			}
+		}
+		for (int i = 0; i < students.size(); i++) {
+			if (students.get(i).Classroom.equals(searchedClassroom)) {
+				double studentGPA = students.get(i).GPA;
+				numberOfStudents++;
+				totalGPA += studentsGPA;
+				gpaArray.add(studentGPA);
+				if (min > studentGPA) {
+					min = studentGPA;
+				}
+				if (max < studentGPA) {
+					max = studentGPA;
+				}
+			}
+		}
+        averageGPA = totalGPA / numberOfStudents;
+        standardDeviation = standardDeviation(gpaArray, averageGPA, numberOfStudents);
+
+        System.out.println("Average GPA: " + averageGPA +
+                "\nMin: " + min +
+                "\nMax: " + max +
+                "\nStandard Deviation: " + standardDeviation);
+	}
+
+	private void busRouteOfStudent(int busRoute, ArrayList<Student> students) {
+        int averageGPA = 0;
+        int numberOfStudents = 0;
+        int totalGPA = 0;
+        int min = 1000000000;
+        int max = 0;
+        int standardDeviation = 0;
+        ArrayList<Double> gpaArray new ArrayList<Double>();
+
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).Bus == busRoute) {
+                double studentGPA = students.get(i).GPA;
+                numberOfStudents++;
+                totalGPA += studentsGPA;
+                gpaArray.add(studentGPA);
+                if (min > studentGPA) {
+                    min = studentGPA;
+                }
+                if (max < studentGPA) {
+                    max = studentGPA;
+                }
+            }
+        }
+        averageGPA = totalGPA / numberOfStudents;
+        standardDeviation = standardDeviation(gpaArray, averageGPA, numberOfStudents);
+
+        System.out.println("Average GPA: " + averageGPA +
+                "\nMin: " + min +
+                "\nMax: " + max +
+                "\nStandard Deviation: " + standardDeviation);
+	}
+
+    private double standardDeviation(ArrayList<Double> gpas, int mean, int total) {
+        int sumOfSquardDifferences = 0;
+
+        for (int i = 0; i < gpas.size(); i++) {
+            sumOfSquardDifferences += (gpas.get(i) - mean) * (gpas.get(i) - mean);
+        }
+        return Math.sqrt(sumOfSquardDifferences/total);
+    }
 
 	public static void main(String[] args) {
 		// variable which while loop evaluates
