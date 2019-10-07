@@ -228,7 +228,7 @@ Classroom
 // No expected output
 
 
-TG: 3
+L: 3
 
 // Tests NR3
 // Valid input
@@ -237,14 +237,14 @@ TG: 3
 // ALPERT, JONATHAN
 
 
-TeachersGrade: 5
+L[evel]: 5
 
 // Tests NR3
 // Valid input
 // No output
 
 
-TeachersGrade 1
+L[evel] 1
 
 // Tests NR3
 // Valid input
@@ -252,7 +252,7 @@ TeachersGrade 1
 // FALKER, ADOLPH
 
 
-TG 6
+L 6
 
 // Tests NR3
 // Valid input
@@ -263,7 +263,7 @@ TG 6
 // NISTENDIRK, NANCY
 
 
-TG
+L
 
 // Tests NR3
 // Triggers E1
