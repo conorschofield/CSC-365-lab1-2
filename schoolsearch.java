@@ -22,6 +22,7 @@ class schoolsearch {
 		System.out.println("C[lassroom]: <number>");
 		System.out.println("T[eachers]G[rade]: <grade level>");
 		System.out.println("D[ata]: <bus route> | <grade level> | <teacher name> B | G | T");
+		System.out.println("E[nrollment]")
 		System.out.println("Q[uit]");
 	}
 
@@ -210,17 +211,23 @@ class schoolsearch {
 			if (s.Grade == grade) {
 				if (storedStudent.isEmpty()) {
 					storedStudent.add(s);
-					storedTeacher.add(NR2(s.Classroom, teachersList));
+					ArrayList<Teacher> temp = NR2(s.Classroom, teachersList);
+					for (Teacher t : temp)
+						storedTeacher.add(t);
 				}
 				// High
 				if (keyword == 'H' && storedStudent.get(0).GPA < s.GPA) {
 					storedStudent.set(0, s);
-					storedTeacher.set(0, NR2(s.Classroom, teachersList));
+					ArrayList<Teacher> temp = NR2(s.Classroom, teachersList);
+					for (Teacher t : temp)
+						storedTeacher.add(t);
 				}
 				// Low
 				if (keyword == 'L' && storedStudent.get(0).GPA > s.GPA) {
 					storedStudent.set(0, s);
-					storedTeacher.set(0, NR2(s.Classroom, teachersList));
+					ArrayList<Teacher> temp = NR2(s.Classroom, teachersList);
+					for (Teacher t : temp)
+						storedTeacher.add(t);
 				}
 			}
 		}
@@ -274,14 +281,15 @@ class schoolsearch {
 	}
 
 	//Classroom number => Teacher
-	private Teacher NR2(int classroomNum, ArrayList<Teacher> teacherlist) {
-		Teacher teach = new Teacher("Not found", "not found", 404);
+	private ArrayList<Teacher> NR2(int classroomNum, ArrayList<Teacher> teacherlist) {
+		ArrayList<Teacher> teachers = new ArrayList<Teacher>();
+		String output;
 		for (Teacher t : teacherlist){
 			if (t.Classroom == classroomNum){
-				teach = t;
+				teachers.add(t);
 			}
 		}
-		return teach;
+		return teachers;
 	}
 
 	// Given a grade, finds all teachers who teach it.

@@ -89,14 +89,14 @@ B: 2
 G: 3 H
 
 //TC-11
-//Tests Requirements R3, R9
+//Tests Requirements R3, R9 , NR2
 // short form command name, non-existing students
 // expected output: SHARRI SWEDLUND, 3.24, ROCIO FAFARD, 55
 
 G: 3 L
 
 //TC-11
-//Tests Requirements R3, R9
+//Tests Requirements R3, R9 , NR2
 // short form command name, non-existing students
 // expected output: MANIE CIGANEK, 2.79, ROCIO FAFARD, 53
 
@@ -328,6 +328,24 @@ D: invalid G
 // Tests NR5
 // Invalid input
 // No Expected output
+
+E1
+
+// Tests NR4
+// Valid input
+// Expected output:
+// Classroom 101 has 1 enrolled students
+// Classroom 102 has 5 enrolled students
+// Classroom 103 has 2 enrolled students
+// Classroom 104 has 2 enrolled students
+// Classroom 105 has 6 enrolled students
+// Classroom 106 has 2 enrolled students
+// Classroom 107 has 7 enrolled students
+// Classroom 108 has 11 enrolled students
+// Classroom 109 has 5 enrolled students
+// Classroom 110 has 2 enrolled students
+// Classroom 111 has 9 enrolled students
+// Classroom 112 has 8 enrolled students
 
 Q 
 
