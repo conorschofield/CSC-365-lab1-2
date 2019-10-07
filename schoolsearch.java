@@ -7,7 +7,8 @@
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.HashMap;
+import java.util.Collections;
 class schoolsearch {
 
 	// prints the different input options
@@ -96,7 +97,10 @@ class schoolsearch {
 				NR3(studentsList, teacherslist, Integer.parseInt(splitInput[1]));
 			}
 		}
-		
+		// NR3: Command is E
+		if (input.charAt(0) == 'E' || splitInput[0].equals("Enrollment")) {
+			NR4(studentsList);
+		}
 		// NR5
 		if (input.charAt(0) == 'D') {
 			if (splitInput.length == 3) {
@@ -299,8 +303,23 @@ class schoolsearch {
 
 	//List out classrooms, ordered by classroom num, w total # students in each class
 	private void NR4(ArrayList<Student> studentsList) {
-		ArrayList<Integer> classrooms;
-		ArrayList<Integer> classroomSizes;
+		HashMap<Integer, Integer> map = new HashMap<>();
+		int temp = 0;
+		for (Student s : studentsList){
+			if (!map.containsKey(s.Classroom)){
+				map.put(s.Classroom, 1);
+			}
+			else {
+				temp = map.get(s.Classroom);
+				temp++;
+				map.replace(s.Classroom,temp);
+			}
+		}
+		ArrayList<Integer> sortedKeys = new ArrayList<Integer>(map.keySet());
+		Collections.sort(sortedKeys);
+		for (Integer x : sortedKeys) {
+			System.out.println("Classroom " + x + " has " + map.get(x) + " enrolled students");
+		}
 	}
 
 	// NR5
