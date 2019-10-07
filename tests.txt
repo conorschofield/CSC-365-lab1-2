@@ -269,6 +269,66 @@ TG
 // Triggers E1
 // No expected output
 
+D: 54 B
+
+// Tests NR5
+// Valid input
+// Expected output
+// Average GPA: 2.9416666626930237
+// Min: 2.819999933242798
+// Max: 3.2300000190734863
+// Standard Deviation: 0.10769042169279272
+
+
+
+D: 999999 B
+
+// Tests NR5
+// Valid input
+// Expected output
+// Average GPA: N/A
+// Min: N/A
+// Max: N/A
+// Standard Deviation: N/A
+
+D: FAFARD T
+
+// Tests NR5
+// Valid input
+// Epected output
+// DAverage GPA: 3.0142856666019986
+// Min: 2.7899999618530273
+// Max: 3.240000009536743
+// Standard Deviation: 0.15088851738024878
+
+D: 6 G
+
+// Tests NR5
+// Valid input
+// Expected output
+// Average GPA: 2.977142878941127
+// Min: 2.7799999713897705
+// Max: 3.2300000190734863
+// Standard Deviation: 0.14416074540472332
+
+D: invalid B
+
+// Tests NR5
+// Invalid input
+// No Expected output
+
+D: 10 T
+
+// Tests NR5
+// Invalid input
+// No Expected output
+
+D: invalid G
+
+// Tests NR5
+// Invalid input
+// No Expected output
+
 Q 
 
 //TC- 12

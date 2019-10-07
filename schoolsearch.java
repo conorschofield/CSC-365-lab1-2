@@ -101,10 +101,22 @@ class schoolsearch {
 		if (input.charAt(0) == 'D') {
 			if (splitInput.length == 3) {
 				if (splitInput[2].charAt(0) == 'B') {
-					busRouteOfStudent(Integer.parseInt(splitInput[1]), studentsList);
+					try {
+						busRouteOfStudent(Integer.parseInt(splitInput[1]), studentsList);
+						// is an integer!
+					} catch (NumberFormatException e) {
+						// not an integer!
+						System.out.println("");
+					}
 				}
 				if (splitInput[2].charAt(0) == 'G') {
-					gradeLevelOfStudent(Integer.parseInt(splitInput[1]), studentsList);
+					try {
+						gradeLevelOfStudent(Integer.parseInt(splitInput[1]), studentsList);
+						// is an integer!
+					} catch (NumberFormatException e) {
+						// not an integer!
+						System.out.println("");
+					}
 				}
 				if (splitInput[2].charAt(0) == 'T') {
 					teacherOfStudent(splitInput[1], studentsList, teacherslist);
@@ -319,13 +331,20 @@ class schoolsearch {
                 }
             }
         }
-        averageGPA = totalGPA / numberOfStudents;
-        standardDeviation = standardDeviation(gpaArray, averageGPA, numberOfStudents);
-
-        System.out.println("Average GPA: " + averageGPA +
-                            "\nMin: " + min +
-                            "\nMax: " + max +
-                            "\nStandard Deviation: " + standardDeviation);
+		if (numberOfStudents != 0) {
+			averageGPA = totalGPA / numberOfStudents;
+			standardDeviation = standardDeviation(gpaArray, averageGPA, numberOfStudents);
+			System.out.println("Average GPA: " + averageGPA +
+					"\nMin: " + min +
+					"\nMax: " + max +
+					"\nStandard Deviation: " + standardDeviation);
+		}
+		else {
+			System.out.println("Average GPA: N/A" +
+					"\nMin: N/A" +
+					"\nMax: N/A" +
+					"\nStandard Deviation: N/A");
+		}
     }
 
 	private void teacherOfStudent(String teacherLastName, ArrayList<Student> students, ArrayList<Teacher> teachers) {
@@ -357,13 +376,20 @@ class schoolsearch {
 				}
 			}
 		}
-        averageGPA = totalGPA / numberOfStudents;
-        standardDeviation = standardDeviation(gpaArray, averageGPA, numberOfStudents);
-
-        System.out.println("Average GPA: " + averageGPA +
-                "\nMin: " + min +
-                "\nMax: " + max +
-                "\nStandard Deviation: " + standardDeviation);
+		if (numberOfStudents != 0) {
+			averageGPA = totalGPA / numberOfStudents;
+			standardDeviation = standardDeviation(gpaArray, averageGPA, numberOfStudents);
+			System.out.println("Average GPA: " + averageGPA +
+					"\nMin: " + min +
+					"\nMax: " + max +
+					"\nStandard Deviation: " + standardDeviation);
+		}
+		else {
+			System.out.println("Average GPA: N/A" +
+					"\nMin: N/A" +
+					"\nMax: N/A" +
+					"\nStandard Deviation: N/A");
+		}
 	}
 
 	private void busRouteOfStudent(int busRoute, ArrayList<Student> students) {
@@ -389,13 +415,20 @@ class schoolsearch {
                 }
             }
         }
-        averageGPA = totalGPA / numberOfStudents;
-        standardDeviation = standardDeviation(gpaArray, averageGPA, numberOfStudents);
-
-        System.out.println("Average GPA: " + averageGPA +
-                "\nMin: " + min +
-                "\nMax: " + max +
-                "\nStandard Deviation: " + standardDeviation);
+		if (numberOfStudents != 0) {
+			averageGPA = totalGPA / numberOfStudents;
+			standardDeviation = standardDeviation(gpaArray, averageGPA, numberOfStudents);
+			System.out.println("Average GPA: " + averageGPA +
+					"\nMin: " + min +
+					"\nMax: " + max +
+					"\nStandard Deviation: " + standardDeviation);
+		}
+		else {
+			System.out.println("Average GPA: N/A" +
+					"\nMin: N/A" +
+					"\nMax: N/A" +
+					"\nStandard Deviation: N/A");
+		}
 	}
 
     private double standardDeviation(ArrayList<Double> gpas, double mean, double total) {
