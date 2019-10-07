@@ -17,7 +17,9 @@ class schoolsearch {
 		System.out.println("B[us]: <number>");
 		System.out.println("G[rade]: <number> [H[igh]|L[ow]]");
 		System.out.println("A[verage]: <number>");
-		System.out.println("I[nfo]");
+		System.out.println("I[nfo]:");
+		System.out.println("C[lassroom]: <number>");
+		System.out.println("T[eachers]G[rade]: <grade level>");
 		System.out.println("D[ata]: <bus route> | <grade level> | <teacher name> B | G | T");
 		System.out.println("Q[uit]");
 	}
@@ -47,7 +49,7 @@ class schoolsearch {
 		//    R6(splitInput[1], studentsList);
         }
 
-        //R7 and R9
+        //R7, R9
         if (input.charAt(0) == 'G') {
         	if (splitInput.length == 2) {
 	        	R7(Integer.parseInt(splitInput[1]), studentsList);
@@ -78,6 +80,23 @@ class schoolsearch {
 		if (input.equals("Q") || input.equals("Quit")) {
 			return false;
 		}
+
+		// NR1
+		if (input.charAt(0) == 'C' || input.equals("Classroom")) {
+			if (splitInput.length == 2) {
+				NR1(studentsList, Integer.parseInt(splitInput[1]));
+			}
+		}
+
+		// NR3: Command is TG: <number>
+		if ((input.charAt(0) == 'T' && input.charAt(1) == 'G') || splitInput[0].equals("TeachersGrade:") 
+			|| splitInput[0].equals("TeachersGrade")) {
+
+			if (splitInput.length == 2) {
+				NR3(studentsList, teacherslist, Integer.parseInt(splitInput[1]));
+			}
+		}
+		
 		// NR5
 		if (input.charAt(0) == 'D') {
 			if (splitInput.length == 3) {
@@ -233,6 +252,15 @@ class schoolsearch {
 		}
 	}
 
+	// Given a classroom number, lists all students assigned to it.
+	private void NR1(ArrayList<Student> studentsList, int room) {
+		for (Student s : studentsList) {
+			if (s.Classroom == room) {
+				System.out.println(s.StLastName + ", " + s.StFirstName);
+			}
+		}
+	}
+
 	//Classroom number => Teacher
 	private Teacher NR2(int classroomNum, ArrayList<Teacher> teacherlist) {
 		Teacher teach = new Teacher("Not found", "not found", 404);
@@ -244,11 +272,29 @@ class schoolsearch {
 		return teach;
 	}
 
+	// Given a grade, finds all teachers who teach it.
+	private void NR3(ArrayList<Student> studentsList, ArrayList<Teacher> teachersList, int grade) {
+		ArrayList<Integer> classroom = new ArrayList<Integer>();
+
+		for (Student s : studentsList) {
+			if (s.Grade == grade && !classroom.contains(s.Grade)) {
+				classroom.add(s.Classroom);
+			}
+		}
+
+		for (Teacher t : teachersList) {
+			if (classroom.contains(t.Classroom)) {
+				System.out.println(t.TLastName + ", " + t.TFirstName);
+			}
+		}
+	}
+
 	//List out classrooms, ordered by classroom num, w total # students in each class
 	private void NR4(ArrayList<Student> studentsList) {
 		ArrayList<Integer> classrooms;
 		ArrayList<Integer> classroomSizes;
 	}
+
 	// NR5
 	private void gradeLevelOfStudent(int gradeLevel, ArrayList<Student> students) {
         double averageGPA = 0;
@@ -375,7 +421,8 @@ class schoolsearch {
 		teachers = parser.parseTeacherFile("teachers.txt");
 
 		// performs io error checking for students.txt
-		if (students == null) {
+		if (students == null || teachers == null) {
+			System.out.println("Data file parsing error");
 			return;
 		}
 
