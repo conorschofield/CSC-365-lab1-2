@@ -97,7 +97,7 @@ class schoolsearch {
 				NR3(studentsList, teacherslist, Integer.parseInt(splitInput[1]));
 			}
 		}
-		// NR3: Command is E
+		// NR4: Command is E
 		if (input.charAt(0) == 'E' || splitInput[0].equals("Enrollment")) {
 			NR4(studentsList);
 		}
