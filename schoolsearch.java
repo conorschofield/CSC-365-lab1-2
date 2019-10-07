@@ -20,9 +20,9 @@ class schoolsearch {
 		System.out.println("A[verage]: <number>");
 		System.out.println("I[nfo]:");
 		System.out.println("C[lassroom]: <number>");
-		System.out.println("T[eachers]G[rade]: <grade level>");
+		System.out.println("L[evel]: <grade level>");
 		System.out.println("D[ata]: <bus route> | <grade level> | <teacher name> B | G | T");
-		System.out.println("E[nrollment]")
+		System.out.println("E[nrollment]");
 		System.out.println("Q[uit]");
 	}
 
@@ -48,7 +48,9 @@ class schoolsearch {
 		}
 		// R6
 		if (input.charAt(0) == 'T') {
-		    R6(splitInput[1], studentsList, teacherslist);
+			if (splitInput.length == 2) {
+				R6(splitInput[1], studentsList, teacherslist);
+			}
         }
 
         //R7, R9
@@ -91,8 +93,8 @@ class schoolsearch {
 		}
 
 		// NR3: Command is TG: <number>
-		if ((input.charAt(0) == 'T' && input.charAt(1) == 'G') || splitInput[0].equals("TeachersGrade:") 
-			|| splitInput[0].equals("TeachersGrade")) {
+		if (input.charAt(0) == 'L' || splitInput[0].equals("Level:")
+			|| splitInput[0].equals("Level")) {
 
 			if (splitInput.length == 2) {
 				NR3(studentsList, teacherslist, Integer.parseInt(splitInput[1]));
