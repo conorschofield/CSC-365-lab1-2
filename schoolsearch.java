@@ -46,7 +46,7 @@ class schoolsearch {
 		}
 		// R6
 		if (input.charAt(0) == 'T') {
-		//    R6(splitInput[1], studentsList);
+		    R6(splitInput[1], studentsList, teacherslist);
         }
 
         //R7, R9
@@ -130,7 +130,7 @@ class schoolsearch {
 		ArrayList<Student> searchedStudents = new ArrayList<Student>();
 		String TLastName = "";
 		String TFirstName = "";
-		for (int i = 0; i < teachers.size(); i++) {
+		for (int i = 0; i < students.size(); i++) {
 			if (students.get(i).StLastName.equals(lastname)) {
 				searchedStudents.add(students.get(i));
 			}
@@ -143,7 +143,7 @@ class schoolsearch {
 				}
 			}
 			System.out.println(searchedStudents.get(i).StLastName + ", " + searchedStudents.get(i).StFirstName
-					+ " " + searchedStudents.get(i).Grade + ", " + searchedStudents.get(i).Classroom + " "
+					+ ", " + searchedStudents.get(i).Grade + ", " + searchedStudents.get(i).Classroom + ", "
 					+ TLastName + ", " + TFirstName);
 		}
 	}
@@ -164,13 +164,9 @@ class schoolsearch {
 	private void R6(String lastname, ArrayList<Student> students, ArrayList<Teacher> teachers) {
 		ArrayList<Student> searchedStudents = new ArrayList<Student>();
 		int searchedClassroom = -1;
-		String TLastName = "";
-		String TFirstName = "";
 		for (int i = 0; i < teachers.size(); i++) {
 			if (teachers.get(i).TLastName.equals(lastname)) {
 				searchedClassroom = teachers.get(i).Classroom;
-				TLastName = teachers.get(i).TLastName;
-				TFirstName = teachers.get(i).TFirstName;
 			}
 		}
 		for (int i = 0; i < students.size(); i++) {
